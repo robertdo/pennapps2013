@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  </head>
+  <body>
+    
+    <nav class="navbar navbar-default navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">My Todo List</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Add item</h3>
+        </div>
+        <div class="panel-body">
+          <form action="/add" method="post">
+            <div class="form-group">
+              <input type="text" name="title" class="form-control" placeholder="New todo item">
+            </div>
+            <div class="form-group">
+              <input type="text" name="description" class="form-control" placeholder="Todo description">
+            </div>
+            <button type="submit" class="btn btn-default">Add</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Todos</h3>
+        </div>
+        <ul class="list-group">
+          {% for item in items %}
+            <li class="list-group-item">
+              <span class="badge"><a class="delete" href="/delete?key={{ item.key.urlsafe() }}">X</a></span>
+              <h4 class="list-group-item-heading">{{ item.title }}</h4>
+              <p class="list-group-item-text">{{ item.description }}</p>
+            </li>
+          {% endfor %}
+          {% if items|length == 0 %}
+            <li class="list-group-item">You have no todos!</li>
+          {% endif %}
+        </ul>
+      </div>
+
+    </div>
+  </body>
+</html>
