@@ -36,7 +36,7 @@ class Item(ndb.Model):
 
 class MainHandler(webapp2.RequestHandler):
   def get(self):
-    items = Item.query(ancestor=list_key()).order(-Item.created).fetch(10)
+    items = Item.query(ancestor=list_key()).fetch(10)
 
     template_values = {
       'items': items
